@@ -3,7 +3,7 @@ import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { useFavourites } from '../context/FavouritesContext';
 
-export default function ProductCard({ item, onAdded }) {
+export default function ProductCard({ item, onAdded, onFavouriteError }) {
   const { isAuthenticated, refreshBasket } = useAuth();
   const { status, isFavourite, toggleFavourite } = useFavourites();
   const [favouriteError, setFavouriteError] = useState('');
@@ -28,10 +28,12 @@ export default function ProductCard({ item, onAdded }) {
 
   async function handleToggleFavourite() {
     setFavouriteError('');
+    onFavouriteError?.('');
     try {
       await toggleFavourite(item.id);
     } catch (error) {
       setFavouriteError(error.message);
+      onFavouriteError?.(error.message);
     }
   }
 
