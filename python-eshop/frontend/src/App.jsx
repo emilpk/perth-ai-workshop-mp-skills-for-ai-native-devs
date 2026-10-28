@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import { AuthProvider } from './context/AuthContext';
+import { FavouritesProvider } from './context/FavouritesContext';
 import BasketPage from './pages/BasketPage';
 import CatalogPage from './pages/CatalogPage';
 import CheckoutPage from './pages/CheckoutPage';
@@ -13,6 +14,7 @@ import SuccessPage from './pages/SuccessPage';
 export default function App() {
   return (
     <AuthProvider>
+      <FavouritesProvider>
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -28,6 +30,7 @@ export default function App() {
           </Routes>
         </Layout>
       </BrowserRouter>
+      </FavouritesProvider>
     </AuthProvider>
   );
 }
