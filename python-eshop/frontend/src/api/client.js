@@ -103,6 +103,11 @@ export const api = {
       body: JSON.stringify({ quantities }),
     }),
 
+  getFavourites: () => request('/api/favourites'),
+  addFavourite: (productId) => request(`/api/favourites/${productId}`, { method: 'PUT' }),
+  removeFavourite: (productId) =>
+    request(`/api/favourites/${productId}`, { method: 'DELETE' }),
+
   register: (email, password) =>
     request('/api/auth/register', {
       method: 'POST',
